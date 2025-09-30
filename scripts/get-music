@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Function to get music data
+get_music_data() {
+    # Check if playerctl is available
+    if ! command -v playerctl &> /dev/null; then
+        echo '{"status": "error", "message": "playerctl not found"}'
+        return
+    fi
+
+    # Get player status
+    status=$(playerctl status 2>/dev/null)
+
+    if [ -z "$status" ] || [ "$status" = "No players found" ]; then
+        echo '{"status": "no_player", "title": "No music playing", "artist": "Unknown", "album": "", "art_url": ""}'
+        return
+    fi
+
+    # Get metadata
+    title=$(playerctl metadata title 2>/dev/null || echo "Unknown")
+    artist=$(playerctl metadata artist 2>/dev/null || echo "Unknown Artist")
+    album=$(playerctl metadata album 2>/dev/null || echo "Unknown Album")
+    art_url=$(playerctl metadata mpris:artUrl 2>/dev/null || echo "")
+
+    # Download album art if it's a web URL
+    if [[ $art_url == http* ]]; then
+        art_path="/tmp/eww_album_art.jpg"
+        wget -q "$art_url" -O "$art_path" 2>/dev/null
+        if [ $? -eq 0 ]; then
+            art_url="$art_path"
+        else
+            art_url=""
+        fi
+    elif [[ $art_url == file://* ]]; then
+        # Remove file:// prefix
+        art_url="${art_url#file://}"
+    fi
+
+    # Output JSON
+    cat << EOF
+{"status": "$status", "title": "$title", "artist": "$artist", "album": "$album", "art_url": "$art_url"}
+EOF
+}
+
+# Initial output
+get_music_data
+
+# Listen for playerctl events and output when changes occur
+playerctl --follow metadata --format '{{status}}' 2>/dev/null | while read -r line; do
+    get_music_data
+done

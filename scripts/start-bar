@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Check if HDMI-A-1 monitor is connected
+if hyprctl monitors | grep -q "HDMI-A-1"; then
+    # External monitor is connected, use main bar
+    eww close-all
+    eww open eww-bar
+else
+    # External monitor not connected, use fallback bar on eDP
+    eww close-all
+    eww open bar_fallback
+fi

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Get initial status and output it
+get_status() {
+  STATUS="$(playerctl status 2>/dev/null)"
+  if [[ $STATUS == "Playing" ]]; then
+    echo 󰏦
+  else
+    echo 󰐍
+  fi
+}
+
+# Output initial status
+get_status
+
+# Listen for playerctl status changes
+playerctl -F status 2>/dev/null | while read -r status; do
+  if [[ $status == "Playing" ]]; then
+    echo 󰏦
+  else
+    echo 󰐍
+  fi
+done

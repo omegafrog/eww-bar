@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# 초기 워크스페이스 출력 (확실하게)
+hyprctl workspaces -j | jq -c 'map(.id) | sort'
+
+# 이벤트 리스닝
+socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
+  while read -r line; do
+    case $line in
+    workspace* | createworkspace* | destroyworkspace*)
+      hyprctl workspaces -j | jq -c 'map(.id) | sort'
+      ;;
+    esac
+  done

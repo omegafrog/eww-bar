@@ -1,0 +1,23 @@
+#!/bin/bash
+
+sleep 0.5  # 캘린더가 완전히 열릴 때까지 기다림
+
+# 마우스 클릭 이벤트 감지
+while eww list-windows | grep -q "calendar"; do
+    # 마우스 클릭 감지 (xinput 사용)
+    if timeout 0.1 xinput test-xi2 --root 2>/dev/null | grep -q "ButtonPress"; then
+        # 마우스 위치 확인
+        eval $(xdotool getmouselocation --shell)
+
+        # 캘린더 윈도우 위치와 크기 확인 (대략적으로)
+        # 오른쪽 상단에서 x >= screen_width - 205, y >= 35, y <= 215 범위
+        screen_width=$(xrandr | grep primary | grep -oP '\d+x\d+' | cut -d'x' -f1)
+        calendar_left=$((screen_width - 205))
+
+        if [[ $X -lt $calendar_left ]] || [[ $Y -lt 35 ]] || [[ $Y -gt 215 ]]; then
+            eww close calendar
+            break
+        fi
+    fi
+    sleep 0.05
+done
