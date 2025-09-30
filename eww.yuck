@@ -149,7 +149,7 @@
 			  :onhoverlost "${eww} update music_reveal=false"
 		(box :class "module-2" :orientation "h" :space-evenly "false" :vexpand "false" :hexpand "false"
 			(box :class "song_cover_art" :vexpand "false" :style "background-image: url('${cover_art}');")
-			(button :class "song" :wrap "false" :limit-width 25 :onclick "~/.config/eww/scripts/pop music" song)
+			(button :class "song" :wrap "false" :onclick "~/.config/eww/scripts/pop music" song)
 	    (revealer :transition "slideright"
 			      :reveal music_reveal
 			      :duration "350ms"

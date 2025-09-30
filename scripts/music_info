@@ -21,7 +21,12 @@ get_song() {
   if [[ -z "$song" ]]; then
     echo "Offline"
   else
-    echo "$song"
+    # Truncate to 15 characters and add ellipsis if longer
+    if [[ ${#song} -gt 15 ]]; then
+      echo "${song:0:15}..."
+    else
+      echo "$song"
+    fi
   fi
 }
 

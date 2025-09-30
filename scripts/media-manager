@@ -1,0 +1,112 @@
+#!/bin/bash
+
+# Media player manager for multiple players
+CURRENT_PLAYER_FILE="/tmp/.current_player"
+
+# Get all active players
+get_players() {
+    playerctl -l 2>/dev/null || echo ""
+}
+
+# Get current selected player
+get_current_player() {
+    if [[ -f "$CURRENT_PLAYER_FILE" ]]; then
+        cat "$CURRENT_PLAYER_FILE"
+    else
+        # Default to first available player
+        get_players | head -n1
+    fi
+}
+
+# Set current player
+set_current_player() {
+    echo "$1" > "$CURRENT_PLAYER_FILE"
+}
+
+# Get next player in list
+get_next_player() {
+    players=$(get_players)
+    current=$(get_current_player)
+
+    if [[ -z "$players" ]]; then
+        echo ""
+        return
+    fi
+
+    # Convert to array
+    players_array=($players)
+    current_index=-1
+
+    # Find current player index
+    for i in "${!players_array[@]}"; do
+        if [[ "${players_array[$i]}" == "$current" ]]; then
+            current_index=$i
+            break
+        fi
+    done
+
+    # Get next player (cycle to beginning if at end)
+    next_index=$(((current_index + 1) % ${#players_array[@]}))
+    echo "${players_array[$next_index]}"
+}
+
+# Get previous player in list
+get_prev_player() {
+    players=$(get_players)
+    current=$(get_current_player)
+
+    if [[ -z "$players" ]]; then
+        echo ""
+        return
+    fi
+
+    # Convert to array
+    players_array=($players)
+    current_index=-1
+
+    # Find current player index
+    for i in "${!players_array[@]}"; do
+        if [[ "${players_array[$i]}" == "$current" ]]; then
+            current_index=$i
+            break
+        fi
+    done
+
+    # Get previous player (cycle to end if at beginning)
+    prev_index=$(((current_index - 1 + ${#players_array[@]}) % ${#players_array[@]}))
+    echo "${players_array[$prev_index]}"
+}
+
+# Get player count
+get_player_count() {
+    get_players | wc -l
+}
+
+# Execute based on argument
+case "$1" in
+    "--players")
+        get_players
+        ;;
+    "--current")
+        get_current_player
+        ;;
+    "--set")
+        set_current_player "$2"
+        ;;
+    "--next-player")
+        next_player=$(get_next_player)
+        set_current_player "$next_player"
+        echo "$next_player"
+        ;;
+    "--prev-player")
+        prev_player=$(get_prev_player)
+        set_current_player "$prev_player"
+        echo "$prev_player"
+        ;;
+    "--count")
+        get_player_count
+        ;;
+    *)
+        echo "Usage: $0 [--players|--current|--set PLAYER|--next-player|--prev-player|--count]"
+        ;;
+esac
