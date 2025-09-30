@@ -9,7 +9,11 @@ Created by saimoom **/
 .bar_class {
     background-color: #2C2C2C;
     border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 5px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4);
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .module {
     margin: 0px 0px 0px 0px;
