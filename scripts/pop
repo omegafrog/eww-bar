@@ -2,7 +2,7 @@
 
 calendar() {
   LOCK_FILE="$HOME/.cache/eww-calendar.lock"
-  EWW_BIN="$HOME/.local/bin/eww/eww"
+  EWW_BIN="/usr/bin/eww"
 
   run() {
     # Check if HDMI-A-1 monitor is connected
@@ -26,7 +26,7 @@ calendar() {
 
 system() {
   LOCK_FILE_MEM="$HOME/.cache/eww-system.lock"
-  EWW_BIN="$HOME/.local/bin/eww/eww"
+  EWW_BIN="/usr/bin/eww"
 
   run() {
     # Check if HDMI-A-1 monitor is connected
@@ -50,7 +50,7 @@ system() {
 
 music() {
   LOCK_FILE_SONG="$HOME/.cache/eww-song.lock"
-  EWW_BIN="$HOME/.local/bin/eww/eww"
+  EWW_BIN="/usr/bin/eww"
 
   run() {
     # Check if HDMI-A-1 monitor is connected
@@ -74,14 +74,14 @@ music() {
 
 audio() {
   LOCK_FILE_AUDIO="$HOME/.cache/eww-audio.lock"
-  EWW_BIN="$HOME/.local/bin/eww/eww"
+  EWW_BIN="/usr/bin/eww"
 
   run() {
     # Check if HDMI-A-1 monitor is connected
     if hyprctl monitors | grep -q "HDMI-A-1"; then
       ${EWW_BIN} -c $HOME/.config/eww open audio_ctl
     else
-      ${EWW_BIN} -c $HOME/.config/eww open audio_ctl_fallback
+      ${EWW_BIN} -c $HOME/.config/eww open audio_ctl
     fi
   }
 

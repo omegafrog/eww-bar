@@ -71,17 +71,17 @@ tooltip label {
   border-radius: 10px;
 }
 .brightbar trough highlight {
-  background-image: linear-gradient(to right, #F4D03F 30%, #E67E22 50%, #D4822A 100%);
+  background-image: linear-gradient(to right, #F4D03F 30%, #F1C40F 50%, #F39C12 100%);
   border-radius: 10px;
 }
 .volbar trough highlight {
-  background-image: linear-gradient(to right, #A0522D 30%, #8B4513 50%, #D4822A 100%);
+  background-image: linear-gradient(to right, #F4D03F 30%, #F1C40F 50%, #F39C12 100%);
   border-radius: 10px;
 }
 .volume_icon {
     font-family: "Material Icons";
     font-size: 22;
-    color: #A0522D;
+    color: #F4D03F;
     margin: 0px 10px 0px 10px;
     font-feature-settings: "liga";
 }
@@ -89,13 +89,13 @@ tooltip label {
 
 .module_essid {
   font-size: 18;
-  color: #A0522D;
+  color: #F4D03F;
   margin: 0px 0px 0px 0px;
 }
 .wifi_icon{
     font-family: "Material Icons";
     font-size: 22;
-    color: #A0522D;
+    color: #F4D03F;
     margin: 0px 10px 0px 10px;
     font-feature-settings: "liga";
 }
@@ -173,7 +173,7 @@ color: #85929E;
 
 /* Occupied */
 .01, .02, .03, .04, .05, .06 {
-  color: #FDF2E9;
+  color: #F4D03F;
 }
 
 /* Focused */
@@ -192,7 +192,7 @@ color: #85929E;
 }
 
 .song {
-	color: #A0522D;
+	color: #F4D03F;
 	font-size : 18px;
 	font-weight : bold;
 	margin : 3px 5px 0px 0px;
@@ -323,7 +323,7 @@ color: #FDF2E9;
 }
 
 .music {
-	color: #A0522D;
+	color: #F4D03F;
 	font-size : 20px;
 	font-weight : bold;
 	margin : 20px 0px 0px -15px;
@@ -360,7 +360,7 @@ color: #FDF2E9;
 
 .music_bar scale trough highlight {
 	all: unset;
-    background-image: linear-gradient(to right, #A0522D 30%, #8B4513 50%, #D4822A 100%);
+    background-image: linear-gradient(to right, #F4D03F 30%, #F1C40F 50%, #F39C12 100%);
 	border-radius: 24px;
 }
 .music_bar scale trough {
@@ -388,7 +388,7 @@ color: #FDF2E9;
 }
 
 .speaker_text {
-	color: #A0522D;
+	color: #F4D03F;
 	font-size : 26px;
 	font-weight : bold;
 	margin: 20px 0px 0px 0px;
@@ -396,7 +396,7 @@ color: #FDF2E9;
 
 .speaker_bar scale trough highlight {
 	all: unset;
-    background-image: linear-gradient(to right, #A0522D 30%, #8B4513 50%, #D4822A 100%);
+    background-image: linear-gradient(to right, #F4D03F 30%, #F1C40F 50%, #F39C12 100%);
 	border-radius: 24px;
 }
 .speaker_bar scale trough {
@@ -423,7 +423,7 @@ color: #FDF2E9;
 }
 
 .mic_text {
-	color: #A0522D;
+	color: #F4D03F;
 	font-size : 26px;
 	font-weight : bold;
 	margin: 0px 0px 0px 0px;
@@ -431,7 +431,7 @@ color: #FDF2E9;
 
 .mic_bar scale trough highlight {
 	all: unset;
-    background-image: linear-gradient(to right, #A0522D 30%, #8B4513 50%, #D4822A 100%);
+    background-image: linear-gradient(to right, #F4D03F 30%, #F1C40F 50%, #F39C12 100%);
 	border-radius: 24px;
 }
 .mic_bar scale trough {
